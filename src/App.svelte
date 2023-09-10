@@ -20,7 +20,7 @@
     }
 
     time.date = new Date(timeToConvert);
-    time.nowString = time.date.getHours() + ':' + pad(time.date.getMinutes()) + ':' + pad(time.date.getSeconds());
+    time.nowString = pad(time.date.getHours()) + ':' + pad(time.date.getMinutes()) + ':' + pad(time.date.getSeconds());
     time.nowPercents = (Number('' + pad(time.date.getHours()) + pad(time.date.getMinutes()) + pad(time.date.getSeconds())) / 10000) * unit;
     time.nowInScale = time.nowPercents / 10
   }
