@@ -4,17 +4,30 @@
 
   let time = {}
 
+  let converting = false
+  let timeToConvert = Date.now();
+
+  let converterHour, converterMinute, converterSecond;
+
+
   function calcTime() {
-    time.unix = Date.now();
-    time.date = new Date();
+
+    if (converterHour || converterMinute || converterSecond) {
+      timeToConvert = `2000-01-17T${converterHour.value}:${converterMinute.value}:${converterSecond.value}`
+    } else {
+      timeToConvert = Date.now();
+    }
+
+    time.date = new Date(timeToConvert);
     time.nowString = time.date.getHours() + ':' + pad(time.date.getMinutes()) + ':' + pad(time.date.getSeconds());
     time.nowPercents = (Number('' + pad(time.date.getHours()) + pad(time.date.getMinutes()) + pad(time.date.getSeconds())) / 10000) * diviser;
     time.nowInScale = time.nowPercents / 10
   }
 
   calcTime()
+  
 
-  function pad(n) { return ("0" + n).slice(-2) }
+  function pad(n) {return ("0" + n).slice(-2)}
 
   setInterval(calcTime, 1000)
 
@@ -22,8 +35,19 @@
 
 <main>
 
-  <h2> Teraz jest </h2>
-  <h1 class="hour big"> {time.nowString} </h1>
+  <button class="floating" on:click={()=>{converting = !converting}}> Konwertuj </button>
+
+  <h2> {converting ? 'Konwertujesz' : 'Teraz jest'} </h2>
+  
+  {#if converting}
+    <div class="converterInputs">
+      <input on:change={calcTime} bind:this={converterHour} min="0" max="23" type="number" value={pad(new Date().getHours())} placeholder={pad(new Date().getHours())}> <span> : </span>
+      <input on:change={calcTime} bind:this={converterMinute} min="0" max="60" type="number" value={pad(new Date().getMinutes())} placeholder={pad(new Date().getMinutes())}> <span> : </span>
+      <input on:change={calcTime} bind:this={converterSecond} min='0' max="60" type="number" value={pad(new Date().getSeconds())} placeholder={pad(new Date().getSeconds())}>
+    </div>
+  {:else}
+    <h1 class="hour big"> {time.nowString} </h1>
+  {/if}
 
   <section class="grid">
     <div class="panel">
@@ -44,6 +68,18 @@
 </main>
 
 <style>
+
+  .converterInputs {
+    margin-top: 1rem;
+  }
+
+  input {
+    min-width: 2ch;
+    width: calc(2ch + 1rem + 4px);
+    padding: 0.5rem;
+    font-size: 3rem;
+    font-weight: 700;
+  }
 
   .scale {
     font-size: 1.5rem;
@@ -84,6 +120,14 @@
 
   .panel {
     padding: 1rem;
+  }
+
+  .floating {
+    position: absolute;
+    top:0;
+    right: 0;
+    margin: 1rem;
+    padding: .5rem .8rem;
   }
 
 </style>
