@@ -43,7 +43,7 @@ h1 {
   }
 
   .hour {
-    color: #ffcc36;
+    color: #ffcc36 !important;
   }
 
   a:hover {
