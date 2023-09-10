@@ -7,14 +7,16 @@
   function calcTime() {
     time.unix = Date.now();
     time.date = new Date();
-    time.nowString = time.date.getHours() + ':' + pad(time.date.getMinutes());
-    time.nowPercents = (Number('' + pad(time.date.getHours()) + pad(time.date.getMinutes())) / 100) * diviser;
+    time.nowString = time.date.getHours() + ':' + pad(time.date.getMinutes()) + ':' + pad(time.date.getSeconds());
+    time.nowPercents = (Number('' + pad(time.date.getHours()) + pad(time.date.getMinutes()) + pad(time.date.getSeconds())) / 10000) * diviser;
     time.nowInScale = time.nowPercents / 10
   }
 
   calcTime()
 
   function pad(n) { return ("0" + n).slice(-2) }
+
+  setInterval(calcTime, 1000)
 
 </script>
 
