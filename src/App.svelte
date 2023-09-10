@@ -42,8 +42,8 @@
   {#if converting}
     <div class="converterInputs">
       <input on:change={calcTime} bind:this={converterHour} min="0" max="23" type="number" value={pad(new Date().getHours())} placeholder={pad(new Date().getHours())}> <span> : </span>
-      <input on:change={calcTime} bind:this={converterMinute} min="0" max="60" type="number" value={pad(new Date().getMinutes())} placeholder={pad(new Date().getMinutes())}> <span> : </span>
-      <input on:change={calcTime} bind:this={converterSecond} min='0' max="60" type="number" value={pad(new Date().getSeconds())} placeholder={pad(new Date().getSeconds())}>
+      <input on:change={calcTime} bind:this={converterMinute} min="0" max="59" type="number" value={pad(new Date().getMinutes())} placeholder={pad(new Date().getMinutes())}> <span> : </span>
+      <input on:change={calcTime} bind:this={converterSecond} min='0' max="59" type="number" value={pad(new Date().getSeconds())} placeholder={pad(new Date().getSeconds())}>
     </div>
   {:else}
     <h1 class="hour big"> {time.nowString} </h1>
@@ -79,6 +79,14 @@
     padding: 0.5rem;
     font-size: 3rem;
     font-weight: 700;
+
+    border: none;
+  background: #3a3a3a;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 700;
+  font-family: inherit;
+    
   }
 
   .scale {
