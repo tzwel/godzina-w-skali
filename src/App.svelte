@@ -12,7 +12,7 @@
 
   function calcTime() {
 
-    if (converterHour || converterMinute || converterSecond) {
+    if (converting) {
       timeToConvert = `2000-01-17T${pad(converterHour.value)}:${pad(converterMinute.value)}:${pad(converterSecond.value)}`
     } else {
       timeToConvert = Date.now();
