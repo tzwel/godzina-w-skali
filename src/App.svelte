@@ -1,6 +1,8 @@
 <script>
+  // const unit = 4.1666666666666666666666666666667;
 
-  const diviser = 4.1666666666666666666666666666667;
+  // this makes more sense
+  const unit = 4.22;
 
   let time = {}
 
@@ -9,18 +11,17 @@
 
   let converterHour, converterMinute, converterSecond;
 
-
   function calcTime() {
 
     if (converting) {
-      timeToConvert = `2000-01-17T${pad(converterHour.value)}:${pad(converterMinute.value)}:${pad(converterSecond.value)}`
+      timeToConvert = `2020-05-17T${pad(converterHour.value)}:${pad(converterMinute.value)}:${pad(converterSecond.value)}`
     } else {
       timeToConvert = Date.now();
     }
 
     time.date = new Date(timeToConvert);
     time.nowString = time.date.getHours() + ':' + pad(time.date.getMinutes()) + ':' + pad(time.date.getSeconds());
-    time.nowPercents = (Number('' + pad(time.date.getHours()) + pad(time.date.getMinutes()) + pad(time.date.getSeconds())) / 10000) * diviser;
+    time.nowPercents = (Number('' + pad(time.date.getHours()) + pad(time.date.getMinutes()) + pad(time.date.getSeconds())) / 10000) * unit;
     time.nowInScale = time.nowPercents / 10
   }
 
